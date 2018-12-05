@@ -1,10 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Logging.Base
 {
-    using System.Collections.Generic;
-    using System.Text;
-
     public abstract class AbstractLogger : ILogger
     {
         private readonly LogLevel _level;
@@ -132,6 +130,11 @@ namespace Logging.Base
 
         public void Debug(string msg)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Debug, msg);
@@ -140,6 +143,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
 
@@ -150,6 +158,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg1, object arg2)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -161,6 +174,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg1, object arg2, object arg3)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -173,6 +191,11 @@ namespace Logging.Base
 
         public void Debug(string msg, params object[] args)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
 
@@ -183,6 +206,11 @@ namespace Logging.Base
 
         public void Debug(string msg, Exception ex)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Debug, msg, ex);
@@ -191,6 +219,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg, Exception ex)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
             this.ThrowForNull(ex, nameof(ex));
@@ -202,6 +235,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg1, object arg2, Exception ex)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -214,6 +252,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object arg1, object arg2, object arg3, Exception ex)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -227,6 +270,11 @@ namespace Logging.Base
 
         public void Debug(string msg, object[] args, Exception ex)
         {
+            if (!this.CanWriteDebug())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
             this.ThrowForNull(ex, nameof(ex));
@@ -242,6 +290,11 @@ namespace Logging.Base
 
         public void Info(string msg)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Info, msg);
@@ -250,6 +303,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
 
@@ -260,6 +318,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg1, object arg2)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -271,6 +334,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg1, object arg2, object arg3)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -283,6 +351,11 @@ namespace Logging.Base
 
         public void Info(string msg, params object[] args)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
 
@@ -293,6 +366,11 @@ namespace Logging.Base
 
         public void Info(string msg, Exception ex)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Info, msg, ex);
@@ -301,6 +379,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg, Exception ex)
         {
+
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
             this.ThrowForNull(ex, nameof(ex));
@@ -312,6 +395,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg1, object arg2, Exception ex)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -324,6 +412,11 @@ namespace Logging.Base
 
         public void Info(string msg, object arg1, object arg2, object arg3, Exception ex)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -337,6 +430,11 @@ namespace Logging.Base
 
         public void Info(string msg, object[] args, Exception ex)
         {
+            if (!this.CanWriteInfo())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
             this.ThrowForNull(ex, nameof(ex));
@@ -352,6 +450,11 @@ namespace Logging.Base
 
         public void Warning(string msg)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Warning, msg);
@@ -360,6 +463,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
 
@@ -370,6 +478,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg1, object arg2)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -381,6 +494,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg1, object arg2, object arg3)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -393,6 +511,11 @@ namespace Logging.Base
 
         public void Warning(string msg, params object[] args)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
 
@@ -403,6 +526,11 @@ namespace Logging.Base
 
         public void Warning(string msg, Exception ex)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Warning, msg, ex);
@@ -411,6 +539,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg, Exception ex)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
             this.ThrowForNull(ex, nameof(ex));
@@ -422,6 +555,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg1, object arg2, Exception ex)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -434,6 +572,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object arg1, object arg2, object arg3, Exception ex)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -447,6 +590,11 @@ namespace Logging.Base
 
         public void Warning(string msg, object[] args, Exception ex)
         {
+            if (!this.CanWriteWarning())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
             this.ThrowForNull(ex, nameof(ex));
@@ -462,6 +610,11 @@ namespace Logging.Base
 
         public void Error(string msg)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Error, msg);
@@ -470,6 +623,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
 
@@ -480,6 +638,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg1, object arg2)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -491,6 +654,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg1, object arg2, object arg3)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -503,6 +671,11 @@ namespace Logging.Base
 
         public void Error(string msg, params object[] args)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
 
@@ -513,6 +686,11 @@ namespace Logging.Base
 
         public void Error(string msg, Exception ex)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Error, msg, ex);
@@ -521,6 +699,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg, Exception ex)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
             this.ThrowForNull(ex, nameof(ex));
@@ -532,6 +715,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg1, object arg2, Exception ex)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -544,6 +732,11 @@ namespace Logging.Base
 
         public void Error(string msg, object arg1, object arg2, object arg3, Exception ex)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -557,6 +750,11 @@ namespace Logging.Base
 
         public void Error(string msg, object[] args, Exception ex)
         {
+            if (!this.CanWriteError())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
             this.ThrowForNull(ex, nameof(ex));
@@ -572,6 +770,11 @@ namespace Logging.Base
 
         public void Fatal(string msg)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Fatal, msg);
@@ -580,6 +783,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
 
@@ -590,6 +798,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg1, object arg2)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -601,6 +814,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg1, object arg2, object arg3)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -613,6 +831,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, params object[] args)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
 
@@ -623,6 +846,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, Exception ex)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
 
             var logEntry = ParseLogMessage(LogLevel.Fatal, msg, ex);
@@ -631,6 +859,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg, Exception ex)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg, nameof(arg));
             this.ThrowForNull(ex, nameof(ex));
@@ -642,6 +875,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg1, object arg2, Exception ex)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -654,6 +892,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object arg1, object arg2, object arg3, Exception ex)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowForNull(arg1, nameof(arg1));
             this.ThrowForNull(arg2, nameof(arg2));
@@ -667,6 +910,11 @@ namespace Logging.Base
 
         public void Fatal(string msg, object[] args, Exception ex)
         {
+            if (!this.CanWriteFatal())
+            {
+                return;
+            }
+
             this.ThrowForNull(msg, nameof(msg));
             this.ThrowIfAnyIsNull(args, nameof(args));
             this.ThrowForNull(ex, nameof(ex));
