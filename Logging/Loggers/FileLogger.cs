@@ -9,11 +9,12 @@ namespace Logging.Loggers
     {
         private readonly object _syncObject = new object();
 
-        private readonly string _filepath;
+        private string _filepath;
 
         protected ILogFileExpiringPolicy _expiringPolicy;
 
-        public FileLogger(LogLevel level, ILogFileExpiringPolicy expiringPolicy, string filepath): base(level)
+        public FileLogger(LogLevel level, string logMessageLayout, ILogFileExpiringPolicy expiringPolicy, string filepath)
+            : base(level, logMessageLayout)
         {
             if (string.IsNullOrEmpty(filepath))
             {
@@ -25,27 +26,14 @@ namespace Logging.Loggers
             this.CreateLogFileIfNotExist();
         }
 
-        protected override void Write(LogLevel level, string msg)
+        protected override void Write(string logEntry)
         {
             lock (_syncObject)
             {
                 // TODO: Expiring policy check
                 using (var file = File.AppendText(this._filepath))
                 {
-                    file.Write(msg);
-                }
-            }
-        }
-
-        protected override void Write(LogLevel level, string msg, Exception ex)
-        {
-            lock (_syncObject)
-            {
-                // TODO: Expiring policy check
-                using (var file = File.AppendText(this._filepath))
-                {
-                    file.Write(msg);
-                    file.Write($"EXCEPTION: {ex}");
+                    file.Write(logEntry);
                 }
             }
         }
