@@ -965,7 +965,7 @@ namespace Logging.Base
 
         private string ParseLogMessage(LogLevel level, string msg)
         {
-            var layoutValues = GetLogLayoutValues(level, msg);
+            var layoutValues = GetLogLayoutValues(level, msg, null);
             return Parse(layoutValues);
         }
 
@@ -993,18 +993,6 @@ namespace Logging.Base
             return logMsg;
         }
 
-        private Dictionary<string, string> GetLogLayoutValues(LogLevel level, string msg)
-        {
-            const string DT_FORMAT = "yyyy-MM-dd HH:mm:ss.fffffff";
-            return new Dictionary<string, string>
-            { 
-                { "datetime", DateTime.UtcNow.ToString(DT_FORMAT) },
-                { "message", msg },
-                { "logLevel", level.ToString() },
-                { "newline", Environment.NewLine }
-            };
-        }
-
         private Dictionary<string, string> GetLogLayoutValues(LogLevel level, string msg, Exception ex)
         {
             const string DT_FORMAT = "yyyy-MM-dd HH:mm:ss.fffffff";
@@ -1014,7 +1002,7 @@ namespace Logging.Base
                 { "message", msg },
                 { "logLevel", level.ToString() },
                 { "newline", Environment.NewLine },
-                { "exception", ex.ToString() }
+                { "exception", ex?.ToString() ?? string.Empty }
             };
         }
     }
