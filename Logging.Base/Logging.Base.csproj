@@ -44,7 +44,6 @@
     <Compile Include="AbstractLogger.cs" />
     <Compile Include="ILogFileExpiringPolicy.cs" />
     <Compile Include="ILogger.cs" />
-    <Compile Include="ILoggerWrapper.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
