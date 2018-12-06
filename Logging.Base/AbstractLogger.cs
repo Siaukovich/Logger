@@ -995,10 +995,10 @@ namespace Logging.Base
 
         private Dictionary<string, string> GetLogLayoutValues(LogLevel level, string msg)
         {
-            const string dtFormat = "yyyy-MM-ddTHH:mm:ss.fffffff";
+            const string DT_FORMAT = "yyyy-MM-dd HH:mm:ss.fffffff";
             return new Dictionary<string, string>
             { 
-                { "datetime", DateTime.UtcNow.ToString(dtFormat) },
+                { "datetime", DateTime.UtcNow.ToString(DT_FORMAT) },
                 { "message", msg },
                 { "logLevel", level.ToString() },
                 { "newline", Environment.NewLine }
@@ -1007,10 +1007,10 @@ namespace Logging.Base
 
         private Dictionary<string, string> GetLogLayoutValues(LogLevel level, string msg, Exception ex)
         {
-            const string dtFormat = "yyyy-MM-ddTHH:mm:ss.fffffff";
+            const string DT_FORMAT = "yyyy-MM-dd HH:mm:ss.fffffff";
             return new Dictionary<string, string>
             {
-                { "datetime", DateTime.UtcNow.ToString(dtFormat) },
+                { "datetime", DateTime.UtcNow.ToString(DT_FORMAT) },
                 { "message", msg },
                 { "logLevel", level.ToString() },
                 { "newline", Environment.NewLine },
