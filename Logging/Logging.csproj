@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Logging</RootNamespace>
     <AssemblyName>Logging</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,16 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Loggers\FileLogger\LogFileExpiringPolicies\ExpiringPolicyBySize.cs" />
+    <Compile Include="Loggers\FileLogger\LogFileExpiringPolicies\ExpiringPolicyByTime.cs" />
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="LoggersWrapper.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="Loggers\DatabaseLogger.cs" />
-    <Compile Include="Loggers\FileLogger.cs" />
+    <Compile Include="Loggers\FileLogger\FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LogFileExpiringPolicies\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Logging.Base\Logging.Base.csproj">
       <Project>{2DA4B389-C6A0-474A-B789-0F494743FDE2}</Project>
