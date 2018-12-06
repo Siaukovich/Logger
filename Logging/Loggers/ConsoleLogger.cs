@@ -6,17 +6,30 @@ namespace Logging.Loggers
 {
     public class ConsoleLogger : AbstractLogger
     {
+        private readonly string _logMessageLayout;
+
         private readonly object _syncObject = new object();
 
         public ConsoleLogger(LogLevel level, string logMessageLayout)
-            : base(level, logMessageLayout)
+            : base(level)
         {
+            this._logMessageLayout = logMessageLayout ?? throw new ArgumentNullException(nameof(logMessageLayout));
         }
 
-        protected override void Write(string logEntry)
+        protected override void Write(LogLevel level, string msg)
         {
             lock (_syncObject)
             {
+                var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, this._logMessageLayout);
+                Console.WriteLine(logEntry);
+            }
+        }
+
+        protected override void Write(LogLevel level, string msg, Exception ex)
+        {
+            lock (_syncObject)
+            {
+                var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, ex, this._logMessageLayout);
                 Console.WriteLine(logEntry);
             }
         }

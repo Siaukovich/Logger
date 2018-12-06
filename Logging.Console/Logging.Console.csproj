@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{351F059F-6429-498F-AE27-874A6176EF54}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logging</RootNamespace>
-    <AssemblyName>Logging</AssemblyName>
+    <ProjectGuid>{7F1B5C92-7C73-45D0-9AB2-8F58364659C3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Logging.Console</RootNamespace>
+    <AssemblyName>Logging.Console</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,21 +46,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogEntryParser.cs" />
-    <Compile Include="LoggerFactory.cs" />
-    <Compile Include="LoggersWrapper.cs" />
-    <Compile Include="Loggers\ConsoleLogger.cs" />
-    <Compile Include="Loggers\DatabaseLogger.cs" />
-    <Compile Include="Loggers\FileLogger\FileLogger.cs" />
-    <Compile Include="Loggers\FileLogger\LogFileExpiringPolicies\ExpiringPolicyBySize.cs" />
-    <Compile Include="Loggers\FileLogger\LogFileExpiringPolicies\ExpiringPolicyByTime.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logging.Base\Logging.Base.csproj">
-      <Project>{2DA4B389-C6A0-474A-B789-0F494743FDE2}</Project>
+      <Project>{2da4b389-c6a0-474a-b789-0f494743fde2}</Project>
       <Name>Logging.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logging.DI\Logging.DI.csproj">
+      <Project>{9988f4f5-af28-4ca8-ae25-4c80dde7af21}</Project>
+      <Name>Logging.DI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
