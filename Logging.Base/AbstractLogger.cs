@@ -4,7 +4,7 @@ namespace Logging.Base
 {
     public abstract class AbstractLogger : ILogger
     {
-        // Костыль (или нет?).
+        // Костыль, чтобы из Wrapper'а можно было установить всем логгерам одинаковое время.
         public DateTime LogTime { get; set; }
 
         private readonly LogLevel _level;

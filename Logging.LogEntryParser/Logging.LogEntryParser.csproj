@@ -49,6 +49,10 @@
       <Project>{2da4b389-c6a0-474a-b789-0f494743fde2}</Project>
       <Name>Logging.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logging.Config\Logging.Config.csproj">
+      <Project>{BD9C4EB5-D9C1-42AB-B090-0CE1D23AEC42}</Project>
+      <Name>Logging.Config</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

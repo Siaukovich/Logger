@@ -52,6 +52,10 @@
       <Project>{2DA4B389-C6A0-474A-B789-0F494743FDE2}</Project>
       <Name>Logging.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logging.DatabaseLogger\Logging.DatabaseLogger.csproj">
+      <Project>{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}</Project>
+      <Name>Logging.DatabaseLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logging.FileLogger\Logging.FileLogger.csproj">
       <Project>{CDF6DD9E-15EF-4022-AE83-10DCE5C0AA37}</Project>
       <Name>Logging.FileLogger</Name>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Logging.Base;
+using Logging.Config;
 
 namespace Logging.LogEntryParser
 {
@@ -21,14 +22,13 @@ namespace Logging.LogEntryParser
 
         private static Dictionary<string, string> GetLogLayoutValues(LogLevel level, string msg, DateTime logTime, Exception ex)
         {
-            const string DT_FORMAT = "yyyy-MM-dd HH:mm:ss.fffffff";
             return new Dictionary<string, string>
                        {
-                           { "datetime", logTime.ToString(DT_FORMAT) },
-                           { "message", msg },
-                           { "logLevel", level.ToString() },
-                           { "newline", Environment.NewLine },
-                           { "exception", ex?.ToString() ?? string.Empty }
+                           { ConfigValues.LogDatetimePlaceholder, logTime.ToString(ConfigValues.DateTimeFormat) },
+                           { ConfigValues.LogMessagePlaceholder,  msg },
+                           { ConfigValues.LogLevelPlaceholder,    level.ToString() },
+                           { ConfigValues.NewlinePlaceholder,     Environment.NewLine },
+                           { ConfigValues.ExceptionPlaceholder,   ex?.ToString() ?? string.Empty }
                        };
         }
 

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CDF6DD9E-15EF-4022-AE83-10DCE5C0AA37}</ProjectGuid>
+    <ProjectGuid>{BD9C4EB5-D9C1-42AB-B090-0CE1D23AEC42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logging.FileLogger</RootNamespace>
-    <AssemblyName>Logging.FileLogger</AssemblyName>
+    <RootNamespace>Logging.Config</RootNamespace>
+    <AssemblyName>Logging.Config</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,24 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileLogger.cs" />
-    <Compile Include="LogFileExpiringPolicies\ExpiringPolicyBySize.cs" />
-    <Compile Include="LogFileExpiringPolicies\ExpiringPolicyByTime.cs" />
+    <Compile Include="ConfigValues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logging.Base\Logging.Base.csproj">
-      <Project>{2DA4B389-C6A0-474A-B789-0F494743FDE2}</Project>
-      <Name>Logging.Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logging.Config\Logging.Config.csproj">
-      <Project>{BD9C4EB5-D9C1-42AB-B090-0CE1D23AEC42}</Project>
-      <Name>Logging.Config</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logging.LogEntryParser\Logging.LogEntryParser.csproj">
-      <Project>{167FAA3C-E3FB-4F03-BF2E-404002B03342}</Project>
-      <Name>Logging.LogEntryParser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

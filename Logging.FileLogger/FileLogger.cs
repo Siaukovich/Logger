@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using Logging.Base;
+using Logging.Config;
 using Parser = Logging.LogEntryParser.LogEntryParser;
 
 namespace Logging.FileLogger
@@ -118,9 +119,9 @@ namespace Logging.FileLogger
         private Dictionary<string, string> GetFilePathConfigValues()
         {
             return new Dictionary<string, string>
-                       {
-                           { "basedir", Directory.GetCurrentDirectory() }
-                       };
+            {
+                { ConfigValues.BasedirPlaceholder, Directory.GetCurrentDirectory() }
+            };
         }
     }
 }
