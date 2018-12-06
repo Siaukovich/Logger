@@ -1,33 +1,30 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-
+using System.IO;
 using Logging.Base;
 
-namespace Logging.Loggers
+namespace Logging.Loggers.FileLogger
 {
-    public class FileLogger : AbstractLogger
+    internal class FileLogger : AbstractLogger
     {
         private readonly object _syncObject = new object();
 
         private string _logFilePath;
 
-        private int _logFilesCount = 1;
+        private readonly ILogFileExpiringPolicy _expiringPolicy;
 
-        protected ILogFileExpiringPolicy _expiringPolicy;
-
-        public FileLogger(LogLevel level, string logMessageLayout, ILogFileExpiringPolicy expiringPolicy, string filepath)
+        public FileLogger(LogLevel level, string logMessageLayout, ILogFileExpiringPolicy expiringPolicy, string logDirPath)
             : base(level, logMessageLayout)
         {
-            if (string.IsNullOrEmpty(filepath))
+            if (string.IsNullOrEmpty(logDirPath))
             {
-                throw new ArgumentException($"{nameof(filepath)} must not be null or empty.");
+                throw new ArgumentException($"{nameof(logDirPath)} must not be null or empty.");
             }
 
-            this._logFilePath = ParseFileName(filepath);
             this._expiringPolicy = expiringPolicy ?? throw new ArgumentNullException(nameof(expiringPolicy));
 
-            this.CreateLogFileIfNotExist();
+            this._logFilePath = GetLogFileFullPath(logDirPath);
+            this.CreateNewLogFile();
         }
 
         protected override void Write(string logEntry)
@@ -36,7 +33,7 @@ namespace Logging.Loggers
             {
                 if (this._expiringPolicy.IsExpired(this._logFilePath))
                 {
-                    RecreateLogFile();
+                    CreateNewLogFile();
                 }
 
                 using (var file = File.AppendText(this._logFilePath))
@@ -46,18 +43,32 @@ namespace Logging.Loggers
             }
         }
 
-        private void RecreateLogFile()
+        private string GetLogFileFullPath(string filepath)
         {
-            var dir = Path.GetDirectoryName(this._logFilePath);
-            var ext = Path.GetExtension(this._logFilePath);
+            var path = ParseFilePath(filepath);
+            var logFileName = GetNewLogFileName();
 
-            const string DT_FORMAT = "yyyy.MM.dd.HH.mm.ss";
-
-            var newPath = Path.Combine(dir, DateTime.UtcNow.ToString(DT_FORMAT) + ext);
-            this._logFilePath = newPath;
+            return Path.Combine(path, logFileName);
         }
 
-        private string ParseFileName(string filepath)
+        private void CreateNewLogFile()
+        {
+            var dir = Path.GetDirectoryName(this._logFilePath);
+
+            var newLogFileName = GetNewLogFileName();
+            var newLogFilePath = Path.Combine(dir, newLogFileName);
+            this._logFilePath = newLogFilePath;
+        }
+
+        private string GetNewLogFileName()
+        {
+            const string DT_FORMAT = "yyyy.MM.dd.HH.mm.ss";
+            const string EXTENSION = ".txt";
+
+            return DateTime.UtcNow.ToString(DT_FORMAT) + EXTENSION;
+        }
+
+        private string ParseFilePath(string filepath)
         {
             var pathValues = GetFilePathConfigValues();
             var prevIndex = 0;
@@ -81,19 +92,6 @@ namespace Logging.Loggers
                        {
                            { "basedir", Directory.GetCurrentDirectory() }
                        };
-        }
-
-        private void CreateLogFileIfNotExist()
-        {
-            if (File.Exists(this._logFilePath))
-            {
-                return;
-            }
-
-            var dirName = Path.GetDirectoryName(this._logFilePath);
-            Directory.CreateDirectory(dirName);
-
-            File.Create(this._logFilePath);
         }
     }
 }
