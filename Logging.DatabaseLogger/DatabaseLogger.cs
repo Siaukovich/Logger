@@ -2,7 +2,7 @@
 
 using Logging.Base;
 
-namespace Logging.Loggers
+namespace Logging.DatabaseLogger
 {
     public class DatabaseLogger : AbstractLogger
     {

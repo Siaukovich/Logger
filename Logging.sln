@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging.FileLogger", "Loggi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging.LogEntryParser", "Logging.LogEntryParser\Logging.LogEntryParser.csproj", "{167FAA3C-E3FB-4F03-BF2E-404002B03342}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging.DatabaseLogger", "Logging.DatabaseLogger\Logging.DatabaseLogger.csproj", "{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging.ConsoleLogger", "Logging.ConsoleLogger\Logging.ConsoleLogger.csproj", "{305CC91A-1862-4830-9C46-C032863AB49C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{167FAA3C-E3FB-4F03-BF2E-404002B03342}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{167FAA3C-E3FB-4F03-BF2E-404002B03342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{167FAA3C-E3FB-4F03-BF2E-404002B03342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FEBC457-DEF8-4C89-93B2-4C46BD9FB110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305CC91A-1862-4830-9C46-C032863AB49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305CC91A-1862-4830-9C46-C032863AB49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305CC91A-1862-4830-9C46-C032863AB49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305CC91A-1862-4830-9C46-C032863AB49C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
