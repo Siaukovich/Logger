@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+
 using Logging.Base;
 
-namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
+namespace Logging.FileLogger.LogFileExpiringPolicies
 {
-    internal class ExpiringPolicyBySize : ILogFileExpiringPolicy
+    public class ExpiringPolicyBySize : ILogFileExpiringPolicy
     {
         private readonly int _maxSizeKB;
 
@@ -15,7 +16,7 @@ namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
                 throw new ArgumentOutOfRangeException(nameof(maxSizeKB));
             }
 
-            _maxSizeKB = maxSizeKB;
+            this._maxSizeKB = maxSizeKB;
         }
 
         public bool IsExpired(string logFilePath)
@@ -34,7 +35,7 @@ namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
             var fileLengthBytes = file.Length;
             var BYTES_IN_KB = 1024;
 
-            return fileLengthBytes * BYTES_IN_KB >= _maxSizeKB;
+            return fileLengthBytes * BYTES_IN_KB >= this._maxSizeKB;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Logging.Base;
+using Parser = Logging.LogEntryParser.LogEntryParser;
 
 namespace Logging.Loggers
 {
@@ -20,7 +21,7 @@ namespace Logging.Loggers
         {
             lock (_syncObject)
             {
-                var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, this._logMessageLayout);
+                var logEntry = Parser.ParseLogMessage(level, msg, this.LogTime, this._logMessageLayout);
                 Console.WriteLine(logEntry);
             }
         }
@@ -29,7 +30,7 @@ namespace Logging.Loggers
         {
             lock (_syncObject)
             {
-                var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, ex, this._logMessageLayout);
+                var logEntry = Parser.ParseLogMessage(level, msg, this.LogTime, ex, this._logMessageLayout);
                 Console.WriteLine(logEntry);
             }
         }

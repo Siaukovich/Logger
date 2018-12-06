@@ -25,7 +25,7 @@ namespace Logging.Console
 
             logger.Info("Info message 1", new ArgumentOutOfRangeException("param name1"));
 
-            logger.Error("Error message 1", new ArgumentNullException("param name2"));
+            logger.Error("Error message 1", new ArgumentNullException("param name2", new Exception("inner")));
 
             logger.Info("Info message 2");
 

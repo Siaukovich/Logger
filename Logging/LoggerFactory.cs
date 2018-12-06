@@ -2,8 +2,7 @@
 
 using Logging.Base;
 using Logging.Loggers;
-using Logging.Loggers.FileLogger;
-using Logging.Loggers.FileLogger.LogFileExpiringPolicies;
+using Logging.FileLogger.LogFileExpiringPolicies;
 
 namespace Logging
 {
@@ -19,7 +18,7 @@ namespace Logging
             var targets = new List<AbstractLogger>
             {
                 new ConsoleLogger(LogLevel.Debug, LAYOUT),
-                new FileLogger(LogLevel.Error, LAYOUT, new ExpiringPolicyByTime(TEN_SECONDS), "${basedir}/logs"),
+                new FileLogger.FileLogger(LogLevel.Error, LAYOUT, new ExpiringPolicyByTime(TEN_SECONDS), "${basedir}/logs"),
                 //new DatabaseLogger(LogLevel.Warning,)
             };
 

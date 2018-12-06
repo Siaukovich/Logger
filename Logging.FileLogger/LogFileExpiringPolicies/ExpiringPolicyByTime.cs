@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+
 using Logging.Base;
 
-namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
+namespace Logging.FileLogger.LogFileExpiringPolicies
 {
-    internal class ExpiringPolicyByTime : ILogFileExpiringPolicy
+    public class ExpiringPolicyByTime : ILogFileExpiringPolicy
     {
         private readonly int _maxFileLifetimeSeconds;
 
@@ -15,7 +16,7 @@ namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
                 throw new ArgumentOutOfRangeException(nameof(maxFileLifetimeSeconds));
             }
 
-            _maxFileLifetimeSeconds = maxFileLifetimeSeconds;
+            this._maxFileLifetimeSeconds = maxFileLifetimeSeconds;
         }
 
         public bool IsExpired(string logFilePath)
@@ -34,7 +35,7 @@ namespace Logging.Loggers.FileLogger.LogFileExpiringPolicies
             var creationTime = file.CreationTime;
             var lifetime = (DateTime.Now - creationTime).Seconds;
 
-            return lifetime >= _maxFileLifetimeSeconds;
+            return lifetime >= this._maxFileLifetimeSeconds;
         }
     }
 }

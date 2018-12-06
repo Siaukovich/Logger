@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Logging.Base;
 
-namespace Logging.Loggers.FileLogger
+using Logging.Base;
+using Parser = Logging.LogEntryParser.LogEntryParser;
+
+namespace Logging.FileLogger
 {
-    internal class FileLogger : AbstractLogger
+    public class FileLogger : AbstractLogger
     {
         private readonly object _syncObject = new object();
 
@@ -26,22 +28,22 @@ namespace Logging.Loggers.FileLogger
             this._logMessageLayout = logMessageLayout ?? throw new ArgumentNullException(nameof(logMessageLayout));
             this._expiringPolicy = expiringPolicy ?? throw new ArgumentNullException(nameof(expiringPolicy));
 
-            this._logFilePath = GetLogFileFullPath(logDirPath);
+            this._logFilePath = this.GetLogFileFullPath(logDirPath);
             this.CreateNewLogFile();
         }
 
         protected override void Write(LogLevel level, string msg)
         {
-            lock (_syncObject)
+            lock (this._syncObject)
             {
                 if (this._expiringPolicy.IsExpired(this._logFilePath))
                 {
-                    CreateNewLogFile();
+                    this.CreateNewLogFile();
                 }
 
                 using (var file = File.AppendText(this._logFilePath))
                 {
-                    var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, this._logMessageLayout);
+                    var logEntry = Parser.ParseLogMessage(level, msg, this.LogTime, this._logMessageLayout);
                     file.Write(logEntry);
                 }
             }
@@ -49,16 +51,16 @@ namespace Logging.Loggers.FileLogger
 
         protected override void Write(LogLevel level, string msg, Exception ex)
         {
-            lock (_syncObject)
+            lock (this._syncObject)
             {
                 if (this._expiringPolicy.IsExpired(this._logFilePath))
                 {
-                    CreateNewLogFile();
+                    this.CreateNewLogFile();
                 }
 
                 using (var file = File.AppendText(this._logFilePath))
                 {
-                    var logEntry = LogEntryParser.ParseLogMessage(level, msg, this.LogTime, ex, this._logMessageLayout);
+                    var logEntry = Parser.ParseLogMessage(level, msg, this.LogTime, ex, this._logMessageLayout);
                     file.Write(logEntry);
                 }
             }
@@ -66,8 +68,8 @@ namespace Logging.Loggers.FileLogger
 
         private string GetLogFileFullPath(string filepath)
         {
-            var path = ParseFilePath(filepath);
-            var logFileName = GetNewLogFileName();
+            var path = this.ParseFilePath(filepath);
+            var logFileName = this.GetNewLogFileName();
 
             return Path.Combine(path, logFileName);
         }
@@ -80,7 +82,7 @@ namespace Logging.Loggers.FileLogger
                 Directory.CreateDirectory(dir);
             }
 
-            var newLogFileName = GetNewLogFileName();
+            var newLogFileName = this.GetNewLogFileName();
             var newLogFilePath = Path.Combine(dir, newLogFileName);
             this._logFilePath = newLogFilePath;
 
@@ -97,7 +99,7 @@ namespace Logging.Loggers.FileLogger
 
         private string ParseFilePath(string filepath)
         {
-            var pathValues = GetFilePathConfigValues();
+            var pathValues = this.GetFilePathConfigValues();
             var prevIndex = 0;
             foreach (var layoutPair in pathValues)
             {

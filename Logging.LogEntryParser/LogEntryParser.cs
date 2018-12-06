@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Logging
-{
-    using Logging.Base;
+using Logging.Base;
 
-    internal static class LogEntryParser
+namespace Logging.LogEntryParser
+{
+    public static class LogEntryParser
     {
         public static string ParseLogMessage(LogLevel level, string msg, DateTime logTime, string layout)
         {
